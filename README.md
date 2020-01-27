@@ -1,3 +1,8 @@
+### SUBMITTED BY:
+[SAI ROHITH ARETI]
+[2019201072]
+[M.Tech (C.S.E)]
+
 # Implemented Functionalites in clean code
 
 ## modified code
@@ -112,10 +117,7 @@ Coresponding command line: "-f -s Bob -n 1 -a 3.2 -p e1 -p e2 -p e3
 * ant jar
 * if(Schema is "l,d*,k##,m&,s[*],s[*],p#")
 * run 'java -cp build/jar/args.jar com.cleancoder.args.ArgsMain' -l -d 10 -k 5,5 -m "key1:val1" -s sai -s rohith -p 10
-####tests
+#### tests run
 * 'java -cp "lib/junit-4.13.jar:lib/hamcrest-core-1.3.jar:build/jar/args.jar" ./test/com/cleancoder/args/ArgsTest.java testCreateWithNoSchemaOrArguments'
 
-## SUBMITTED BY:
-[SAI ROHITH ARETI]
-[2019201072]
-[M.Tech (C.S.E)]
+
