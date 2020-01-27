@@ -227,21 +227,35 @@ public class ArgsTest {
 
   @Test
   public void testExtraArguments() throws Exception {
-    Args args = new Args("x,y*", new String[]{"-x", "-y", "alpha", "beta"});
-    assertTrue(args.getBoolean('x'));
-    assertEquals("alpha", args.getString('y'));
-    assertEquals(3, args.nextArgument());
+    try {
+      Args args = new Args("x,y*", new String[]{"-x", "-y", "alpha", "beta"});
+    }
+    catch (ArgsException e){
+      assertEquals(EXTRA_ARGS,e.getErrorCode());
+    }
   }
 
   @Test
   public void testExtraArgumentsThatLookLikeFlags() throws Exception {
-    Args args = new Args("x,y", new String[]{"-x", "alpha", "-y", "beta"});
-    assertTrue(args.has('x'));
-    assertFalse(args.has('y'));
-    assertTrue(args.getBoolean('x'));
-    assertFalse(args.getBoolean('y'));
-    assertEquals(1, args.nextArgument());
+    try {
+      Args args = new Args("x,y", new String[]{"-x", "alpha", "-y", "beta"});
+    }
+    catch (ArgsException e) {
+      assertEquals(EXTRA_ARGS,e.getErrorCode());
+    }
+
   }
+
+  @Test
+  public void repeatIdCheck() throws Exception{
+    try {
+      Args args = new Args("x*,x#", new String[]{"-x", "alpha", "-x", "42"});
+    }
+    catch(ArgsException e){
+      assertEquals(REPEAT_ID,e.getErrorCode());
+    }
+  }
+
 
 }
 

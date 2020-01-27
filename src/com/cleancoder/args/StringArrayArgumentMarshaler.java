@@ -7,10 +7,11 @@ import java.util.*;
 public class StringArrayArgumentMarshaler implements ArgumentMarshaler {
   private List<String> strings = new ArrayList<String>();
 
-  public void set(Iterator<String> currentArgument) throws ArgsException {
-    try {
-      strings.add(currentArgument.next());
-    } catch (NoSuchElementException e) {
+  public void set(String parameter) throws ArgsException {
+    if(parameter!="invalid") {
+        strings.add(parameter);
+    }
+    else{
       throw new ArgsException(MISSING_STRING);
     }
   }

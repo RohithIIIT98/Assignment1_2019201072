@@ -8,10 +8,15 @@ import static com.cleancoder.args.ArgsException.ErrorCode.MISSING_STRING;
 public class StringArgumentMarshaler implements ArgumentMarshaler {
   private String stringValue = "";
 
-  public void set(Iterator<String> currentArgument) throws ArgsException {
-    try {
-      stringValue = currentArgument.next();
-    } catch (NoSuchElementException e) {
+  public void set(String parameter) throws ArgsException {
+    if(parameter!="invalid") {
+      try {
+        stringValue = parameter;
+      } catch (NoSuchElementException e) {
+        throw new ArgsException(MISSING_STRING);
+      }
+    }
+    else{
       throw new ArgsException(MISSING_STRING);
     }
   }

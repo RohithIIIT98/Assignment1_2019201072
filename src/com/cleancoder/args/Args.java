@@ -8,6 +8,7 @@ public class Args {
   private Map<Character, ArgumentMarshaler> marshalers;
   private Set<Character> argsFound;
   private ListIterator<String> currentArgument;
+  private Map<Character,String>data=new HashMap<>();
 
   public Args(String schema, String[] args) throws ArgsException {
     marshalers = new HashMap<Character, ArgumentMarshaler>();
@@ -23,10 +24,21 @@ public class Args {
         parseSchemaElement(element.trim());
   }
 
+  private void repeatIdCheck(Character elementId,String elementTail) throws ArgsException{
+     if(!data.containsKey(elementId)){
+      data.put(elementId,elementTail);
+    }
+    else{
+      if(data.get(elementId)!=elementTail)
+        throw new ArgsException(REPEAT_ID);
+    }
+  }
+
   private void parseSchemaElement(String element) throws ArgsException {
     char elementId = element.charAt(0);
     String elementTail = element.substring(1);
     validateSchemaElementId(elementId);
+    repeatIdCheck(elementId,elementTail);
     if (elementTail.length() == 0)
       marshalers.put(elementId, new BooleanArgumentMarshaler());
     else if (elementTail.equals("*"))
@@ -55,7 +67,7 @@ public class Args {
         parseArgumentCharacters(argString.substring(1));
       } else {
         currentArgument.previous();
-        break;
+        throw new ArgsException(EXTRA_ARGS);
       }
     }
   }
@@ -72,7 +84,18 @@ public class Args {
     } else {
       argsFound.add(argChar);
       try {
-        m.set(currentArgument);
+        char fault='l';
+        String parameter;
+        if(argChar==fault){
+          m.set("");
+        }
+        else {
+          if (currentArgument.hasNext()) {
+            m.set(currentArgument.next());
+          } else {
+            m.set("invalid");
+          }
+        }
       } catch (ArgsException e) {
         e.setErrorArgumentId(argChar);
         throw e;
