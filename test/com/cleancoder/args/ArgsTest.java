@@ -256,6 +256,20 @@ public class ArgsTest {
     }
   }
 
+  @Test
+  public void Mapvalnokey() throws Exception {
+    try {
+      Args args = new Args("f&", new String[]{"-f", "key1:val1,:val2"});
+      assertTrue(args.has('f'));
+      Map<String, String> map = args.getMap('f');
+      assertEquals("val1", map.get("key1"));
+      assertEquals(null, map.get("key2"));
+    }
+    catch(ArgsException e){
+      assertEquals(MAPVALBUTNOKEY,e.getErrorCode());
+    }
+  }
+
 
 }
 
