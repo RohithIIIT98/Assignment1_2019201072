@@ -75,7 +75,7 @@ clean and more understandable
 In IntelliJ makes clear spaces and nested code
 #### Avoding self explanotory comments
 
-## Sample Code specifies how to run
+## sample code on hoe to run
 This is the java version of the Args program described in: http://butunclebob.com/ArticleS.UncleBob.CleanCodeArgs
 ```bash
 public class ArgsMain {
@@ -102,9 +102,16 @@ Schema:
  - char#   - Integer arg.
  - char##  - double arg.
  - char[*] - one element of a string array.
+ -char&    - map argument key:val,.. as string array
 
 Example schema: (f,s*,n#,a##,p[*])
 Coresponding command line: "-f -s Bob -n 1 -a 3.2 -p e1 -p e2 -p e3
+
+## How to run
+-ant compile
+-ant jar
+if(Schema is "l,d*,k##,m&,s[*],s[*],p#")
+-run 'java -cp build/jar/args.jar com.cleancoder.args.ArgsMain' -l -d 10 -k 5,5 -m "key1:val1" -s sai -s rohith -p 10
 
 ## SUBMITTED BY:
 [SAI ROHITH ARETI]
