@@ -1,7 +1,7 @@
 ### SUBMITTED BY:
-[SAI ROHITH ARETI]
-[2019201072]
-[M.Tech (C.S.E)]
+* [SAI ROHITH ARETI]
+* [2019201072]
+* [M.Tech (C.S.E)]
 
 # Implemented Functionalites in clean code
 
