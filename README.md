@@ -56,6 +56,14 @@ Type:
 schema:"x*"
 string:"-x 10 100"
 ```
+### Exception for missing Key
+if key is missed we are comparing with null and returning it.
+```bash
+Type:
+schema:"x&"
+string:"-x key1:val1,:val2"
+```
+
 ## Characteristics of clean code
 #### Naming Conventions:
 clear and understandable to naive
